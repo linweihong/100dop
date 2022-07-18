@@ -1,5 +1,6 @@
 ### Hangman ###
 
+import os
 import random
 
 stages = [
@@ -65,6 +66,7 @@ while not guessed and life != 6:
         guesses.sort()
         print("Guesses: " + " ".join(c.upper() for c in guesses))
     guess = input("Guess a letter: ").lower()
+    os.system("CLS")
     if len(guess) != 1 or not guess.isalpha():
         print("Invalid guess.")
     elif guess in guesses:
