@@ -59,18 +59,24 @@ while game:
             drawing = False
     if bust(p_hand):
         print("You're bust. You lose.")
-    elif score(p_hand) > score(c_hand):
-        print(f"The computer's cards: {c_hand}")
-        if score(p_hand) == 21:
-            print("Blackjack!")
-        print("You win!")
-    elif score(p_hand) == score(c_hand):
-        print(f"The computer's cards: {c_hand}")
-        if score(p_hand) == 21:
-            print("Blackjack! But...")
-        print("It's a draw.")
     else:
-        print(f"The computer's cards: {c_hand}")
-        print("You lose.")
+        while score(c_hand) < 17:
+            c_hand.append(cards.pop(cards.index(random.choice(cards))))
+        if bust(c_hand):
+            print(f"The computer's cards: {c_hand}")
+            print("Computer is bust. You win!")
+        elif score(p_hand) > score(c_hand):
+            print(f"The computer's cards: {c_hand}")
+            if score(p_hand) == 21:
+                print("Blackjack!")
+            print("You win!")
+        elif score(p_hand) == score(c_hand):
+            print(f"The computer's cards: {c_hand}")
+            if score(p_hand) == 21:
+                print("Blackjack! But...")
+            print("It's a draw.")
+        else:
+            print(f"The computer's cards: {c_hand}")
+            print("You lose.")
     if input("Do you want to play another game of Blackjack? Type 'y' or 'n': ") == "n":
         game = False
