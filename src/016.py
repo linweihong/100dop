@@ -114,6 +114,8 @@ while True:
     if choice == "report":
         cm.report()
         mm.report()
+    elif choice == "off":
+        break
     else:
         order = m.find_drink(choice)
         if cm.is_resource_sufficient(order):
