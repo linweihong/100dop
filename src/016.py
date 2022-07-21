@@ -117,7 +117,7 @@ while True:
     elif choice == "off":
         break
     else:
-        order = m.find_drink(choice)
-        if cm.is_resource_sufficient(order):
-            if mm.make_payment(order.cost):
-                cm.make_coffee(order)
+        if order := m.find_drink(choice):
+            if cm.is_resource_sufficient(order):
+                if mm.make_payment(order.cost):
+                    cm.make_coffee(order)
