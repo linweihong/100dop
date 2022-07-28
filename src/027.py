@@ -6,7 +6,7 @@ FONT = ("Fira Code", 14)
 
 
 def button_click():
-    output_label["text"] = int(user_input.get()) * 1.609
+    output_label["text"] = float(user_input.get()) * 1.609
 
 
 # Window
