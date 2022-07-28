@@ -1,1 +1,8 @@
 /.venv
+*.pyc
+*.jpg
+*.DS_Store
+*.png
+/src/res029/*
+/src/res030/*
+/src/res031/*
