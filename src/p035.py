@@ -1,18 +1,19 @@
 # Open Weather API
 
+
 import asyncio
-import os
 
 import requests
 import telegram
 
-T_TOKEN = os.environ.get("T_TOKEN")
+from constants import CHATID_W as CHATID
+from constants import OPENWEATHERMAP_API_KEY as OW_API_KEY
+from constants import TELEGRAM_TOKEN
+
 ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
-OW_API_KEY = os.environ.get("OW_API_KEY")
 SG_LON = "103.819839"
 SG_LAT = "1.352083"
 
-CHATID = os.environ.get("CHATID")
 
 CODES = {
     "2": "storm",
@@ -29,7 +30,7 @@ params = {
 
 
 async def tbot(msg):
-    bot = telegram.Bot(T_TOKEN)
+    bot = telegram.Bot(TELEGRAM_TOKEN)
     async with bot:
         await bot.send_message(
             text=msg,
