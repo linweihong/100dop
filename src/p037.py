@@ -7,8 +7,8 @@ import requests
 from constants import PIXELA_TOKEN
 
 PXLA_USERS_EP = "https://pixe.la/v1/users"
-PXLA_GRAPH_EP = PXLA_USERS_EP + "/weihong/graphs"
-PXLA_CG_EP = PXLA_GRAPH_EP + "/codinggraph"
+PXLA_GRAPH_EP = PXLA_USERS_EP + "/irxs/graphs"
+PXLA_CG_EP = PXLA_GRAPH_EP + "/coding"
 USERNAME = "irxs"
 
 q = input("How many hours did you code today? ")
@@ -28,3 +28,4 @@ payload = {
 # r = requests.post(PXLA_USERS_EP, json=payload)
 # r = requests.post(PXLA_GRAPH_EP, json=payload, headers=headers)
 r = requests.post(PXLA_CG_EP, json=payload, headers=headers)
+print(r.text)
