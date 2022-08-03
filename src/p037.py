@@ -1,6 +1,6 @@
 # Habit tracker #
 
-from datetime import date
+import datetime as dt
 
 import requests
 
@@ -12,11 +12,16 @@ PXLA_CG_EP = PXLA_GRAPH_EP + "/codinggraph"
 USERNAME = "irxs"
 
 q = input("How many hours did you code today? ")
+t = input("Are you logging this after midnight? [y/n] ")
+if t.lower() == "y":
+    i = 1
+else:
+    i = 0
 
 headers = {"X-USER-TOKEN": PIXELA_TOKEN}
 
 payload = {
-    "date": date.today().strftime("%Y%m%d"),
+    "date": (dt.date.today() - dt.timedelta(days=i)).strftime("%Y%m%d"),
     "quantity": q,
 }
 
