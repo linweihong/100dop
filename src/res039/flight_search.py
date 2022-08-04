@@ -8,13 +8,13 @@ from constants import flightsearch_key as f_apikey
 
 class FlightSearch:
     # This class is responsible for talking to the Flight Search API.
-    def __init__(self):
+    def __init__(self, limit=200):
         self.dump_endpoint = endpoint + "locations/dump"
         self.headers = {"apikey": f_apikey}
         self.dump_payload = {
             "locale": "en-US",
             "location_types": "city",
-            "limit": 200,
+            "limit": limit,
             "sort": "rank",
         }
 

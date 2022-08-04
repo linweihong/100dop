@@ -1,4 +1,3 @@
-
 import requests
 
 from constants import endpoint
@@ -7,16 +6,22 @@ from constants import flightsearch_key as f_apikey
 
 class FlightData:
     # This class is responsible for structuring the flight data.
-    def __init__(self):
+    def __init__(
+        self,
+        nights_in_dst_from=7,
+        nights_in_dest_to=28,
+        max_stopovers=1,
+        adults=2,
+    ):
         self.search_endpoint = endpoint + "v2/search"
         self.headers = {"apikey": f_apikey}
         self.payload = {
             "fly_from": "SIN",
             "flight_type": "round",
-            "nights_in_dst_from": 7,
-            "nights_in_dst_to": 28,
-            "max_stopovers": 1,
-            "adults": 2,
+            "nights_in_dst_from": nights_in_dst_from,
+            "nights_in_dst_to": nights_in_dest_to,
+            "max_stopovers": max_stopovers,
+            "adults": adults,
             "curr": "SGD",
             "locale": "en",
         }
