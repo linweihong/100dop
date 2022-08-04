@@ -22,6 +22,7 @@ class FlightSearch:
         r = requests.get(
             url=self.dump_endpoint, headers=self.headers, params=self.dump_payload
         )
+        r.raise_for_status()
         return r.json()["locations"]
 
     def fetch_codes(self):
