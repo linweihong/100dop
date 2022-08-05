@@ -43,7 +43,17 @@ class FlightData:
         return r.json()["data"]
 
     def get_cheapest_flight(self):
-        d = self.search_flights()[0]
+        try:
+            d = self.search_flights()[0]
+        except IndexError:
+            return {
+                "nights_in_dest": 0,
+                "price": 0,
+                "airlines": "N/A",
+                "link": None,
+                "flight_date": None,
+                "return_date": None,
+            }
         return {
             "nights_in_dest": d["nightsInDest"],
             "price": d["price"],
