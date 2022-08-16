@@ -6,9 +6,11 @@ import sys
 from xml.dom.minidom import Element
 
 from selenium import webdriver
-from selenium.common.exceptions import (ElementClickInterceptedException,
-                                        StaleElementReferenceException,
-                                        WebDriverException)
+from selenium.common.exceptions import (
+    ElementClickInterceptedException,
+    StaleElementReferenceException,
+    WebDriverException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
@@ -62,7 +64,6 @@ class CookieClicker:
         if t := self.get_element_text(
             By.CSS_SELECTOR, "div#tooltipBuilding div.descriptionBlock b"
         ):
-
             cps = float(t.split(" ")[0].replace(",", ""))
         else:
             return 0
@@ -141,10 +142,11 @@ class CookieClicker:
             .find_element(By.CSS_SELECTOR, "span.price")
             .text.replace(",", "")
         )
+        self.time_to_next_upgrade = (next_upgrade_price - self.cookies) / self.avg_cps
         # next_upgrade_price = int(products[-1].text.replace(",", ""))
-        if (
-            t := ((next_upgrade_price - self.cookies) / self.cps)
-        ) < 60 * 10:  # Cause script to wait if next upgrade is within 10 minutes
+        if self.time_to_next_upgrade < (
+            60 * 10
+        ):  # Cause script to wait if next upgrade is within 10 minutes
             self.click_cookie(round(t))
             products[-1].click()
 
@@ -194,6 +196,7 @@ class CookieClicker:
 
 
 cc = CookieClicker()
+ticker = 1
 
 while True:
     cc.eval_next_upgrade()
@@ -213,4 +216,10 @@ while True:
         #     driver.find_element(By.ID, most_expensive_product[0]).click()
     while cc.fetch_products():
         cc.buy_best_product()
-    cc.announce_run_time()
+    if not ticker % 10:
+        cc.announce_run_time()
+        print(f"Average cps: {cc.avg_cps:,.02f}")
+        print(f"Time to next upgrade: {cc.time_to_next_upgrade:,.02f}")
+        ticker = 1
+    else:
+        ticker += 1
