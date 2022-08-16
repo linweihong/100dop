@@ -147,7 +147,7 @@ class CookieClicker:
         if self.time_to_next_upgrade < (
             60 * 10
         ):  # Cause script to wait if next upgrade is within 10 minutes
-            self.click_cookie(round(t))
+            self.click_cookie(round(self.time_to_next_upgrade))
             products[-1].click()
 
     def announce_run_time(self):
